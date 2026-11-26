@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DiffWorldMimic: Scaling Humanoid Loco-Manipulation with Differentiable World Models</title>
+  <meta name="description" content="DiffWorldMimic learns humanoid-object interactions and scene-aware locomotion through a differentiable world model.">
+  <meta property="og:title" content="DiffWorldMimic">
+  <meta property="og:description" content="Scaling Humanoid Loco-Manipulation with Differentiable World Models.">
+  <meta property="og:image" content="assets/media/og.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <header class="hero">
+    <div class="container">
+      <h1 class="wordmark">DiffWorldMimic</h1>
+      <p class="subtitle">Scaling Humanoid Loco-Manipulation with Differentiable World Models</p>
+    </div>
+  </header>
+
+  <section class="teaser-section">
+    <div class="container container--wide">
+      <figure>
+        <img class="media" src="assets/media/teaser.jpg" width="3456" height="1024"
+             alt="Many humanoid robots lifting and carrying chairs, tables, lamps and boxes on the left, and climbing stairs and sitting on furniture on the right.">
+        <figcaption>
+          <span class="name">DiffWorldMimic</span> learns humanoid-object interactions and scene-aware locomotion
+          through a differentiable world model: rollouts of lifting and carrying objects of different shapes (left),
+          and climbing stairs and sitting on furniture (right).
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="abstract">
+    <div class="container container--narrow">
+      <h2>Abstract</h2>
+      <p class="abstract">
+        We present <span class="name">DiffWorldMimic</span>, a model-based reinforcement learning framework for efficient object- and scene-aware
+        humanoid loco-manipulation. Building on SuperMimic, which learns differentiable humanoid dynamics for motion
+        tracking, we extend the world model to jointly predict humanoid and object motion, conditioned on object shape
+        and surrounding scene geometry. By explicitly modeling object translation, orientation, and contact, and
+        incorporating terrain information throughout imagined rollouts, a single differentiable world model captures
+        interactions across diverse objects, scenes, and terrains. This enables efficient learning from demonstrations
+        involving object manipulation and scene-aware locomotion, beyond free-space humanoid motion tracking.
+      </p>
+      <p class="abstract">
+        We further apply the same model-based reinforcement learning to a generative controller that follows partial
+        goals from onboard depth. We train a full-reference tracker with model-based reinforcement learning and distill
+        it into a variational student conditioned on partial goals and depth observations. In the same run, the student
+        is also trained with model-based reinforcement learning, with depth maps rendered at the camera poses of the
+        imagined states. In experiments on humanoid-object interactions and scene-aware locomotion, <span class="name">DiffWorldMimic</span> reaches higher
+        tracking success than model-free reinforcement learning with the same observations and rewards in less training
+        time, which shows the effectiveness of shared interaction-aware dynamics and provides a path toward scalable,
+        versatile humanoid loco-manipulation.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="video">
+    <div class="container">
+      <h2>Video</h2>
+      <video class="media" controls playsinline preload="metadata" poster="assets/media/video_poster.jpg">
+        <source src="assets/media/diffworldmimic_video.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <section class="section" id="tracking">
+    <div class="container container--wide">
+      <h2>Motion Tracking</h2>
+
+      <h3 class="group">Object motions</h3>
+      <p class="group-note">OMOMO: lifting and carrying objects of different shapes.</p>
+      <div class="tiles">
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/ob/ob_00.jpg" data-src="assets/media/tracking/ob/ob_00.mp4"></video><figcaption>Large box</figcaption></figure>  <!-- sub12_largebox_034_v00 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/ob/ob_01.jpg" data-src="assets/media/tracking/ob/ob_01.mp4"></video><figcaption>Chair</figcaption></figure>  <!-- sub12_woodchair_027_v00 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/ob/ob_02.jpg" data-src="assets/media/tracking/ob/ob_02.mp4"></video><figcaption>Table</figcaption></figure>  <!-- sub12_smalltable_032_v00 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/ob/ob_03.jpg" data-src="assets/media/tracking/ob/ob_03.mp4"></video><figcaption>Floor lamp</figcaption></figure>  <!-- sub1_floorlamp_012_v00 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/ob/ob_04.jpg" data-src="assets/media/tracking/ob/ob_04.mp4"></video><figcaption>Small box</figcaption></figure>  <!-- sub4_smallbox_019_v00 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/ob/ob_05.jpg" data-src="assets/media/tracking/ob/ob_05.mp4"></video><figcaption>Chair</figcaption></figure>  <!-- sub7_whitechair_017_v00 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/ob/ob_06.jpg" data-src="assets/media/tracking/ob/ob_06.mp4"></video><figcaption>Large table</figcaption></figure>  <!-- sub1_largetable_017_v00 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/ob/ob_07.jpg" data-src="assets/media/tracking/ob/ob_07.mp4"></video><figcaption>Tripod</figcaption></figure>  <!-- sub12_tripod_006_v00 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/ob/ob_08.jpg" data-src="assets/media/tracking/ob/ob_08.mp4"></video><figcaption>Clothes stand</figcaption></figure>  <!-- sub1_clothesstand_065_v00 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/ob/ob_09.jpg" data-src="assets/media/tracking/ob/ob_09.mp4"></video><figcaption>Large box</figcaption></figure>  <!-- sub8_largebox_023_v00 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/ob/ob_10.jpg" data-src="assets/media/tracking/ob/ob_10.mp4"></video><figcaption>Chair</figcaption></figure>  <!-- sub14_woodchair_018_v00 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/ob/ob_11.jpg" data-src="assets/media/tracking/ob/ob_11.mp4"></video><figcaption>Table</figcaption></figure>  <!-- sub6_smalltable_034_v00 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/ob/ob_12.jpg" data-src="assets/media/tracking/ob/ob_12.mp4"></video><figcaption>Floor lamp</figcaption></figure>  <!-- sub1_floorlamp_017_v00 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/ob/ob_13.jpg" data-src="assets/media/tracking/ob/ob_13.mp4"></video><figcaption>Small box</figcaption></figure>  <!-- sub4_smallbox_044_v00 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/ob/ob_14.jpg" data-src="assets/media/tracking/ob/ob_14.mp4"></video><figcaption>Chair</figcaption></figure>  <!-- sub7_whitechair_014_v00 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/ob/ob_15.jpg" data-src="assets/media/tracking/ob/ob_15.mp4"></video><figcaption>Large table</figcaption></figure>  <!-- sub1_largetable_036_v00 -->
+      </div>
+
+      <h3 class="group">Scene and terrain motions</h3>
+      <p class="group-note">GRAIL: climbing stairs, walking over slopes and curbs, and sitting on chairs.</p>
+      <div class="tiles">
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/sc/sc_00.jpg" data-src="assets/media/tracking/sc/sc_00.mp4"></video><figcaption>Stairs</figcaption></figure>  <!-- terrain_stairs__stairs_2646__0001 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/sc/sc_01.jpg" data-src="assets/media/tracking/sc/sc_01.mp4"></video><figcaption>Slope</figcaption></figure>  <!-- terrain_slopes__slope_157__006 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/sc/sc_02.jpg" data-src="assets/media/tracking/sc/sc_02.mp4"></video><figcaption>Curbs</figcaption></figure>  <!-- terrain_curbs__curb_069__002 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/sc/sc_03.jpg" data-src="assets/media/tracking/sc/sc_03.mp4"></video><figcaption>Sitting on a chair</figcaption></figure>  <!-- sitting__indonesian_balinese_dragon_carved_teak_ceremonial_seat__006 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/sc/sc_04.jpg" data-src="assets/media/tracking/sc/sc_04.mp4"></video><figcaption>Stairs</figcaption></figure>  <!-- terrain_stairs__stairs_2427__0001 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/sc/sc_05.jpg" data-src="assets/media/tracking/sc/sc_05.mp4"></video><figcaption>Slope</figcaption></figure>  <!-- terrain_slopes__slope_064__006 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/sc/sc_06.jpg" data-src="assets/media/tracking/sc/sc_06.mp4"></video><figcaption>Curbs</figcaption></figure>  <!-- terrain_curbs__curb_056__000 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/sc/sc_07.jpg" data-src="assets/media/tracking/sc/sc_07.mp4"></video><figcaption>Sitting on a chair</figcaption></figure>  <!-- sitting__industrial_black_pipe_frame_chair_with_metal_seat__007 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/sc/sc_08.jpg" data-src="assets/media/tracking/sc/sc_08.mp4"></video><figcaption>Stairs</figcaption></figure>  <!-- terrain_stairs__stairs_2136__0000 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/sc/sc_09.jpg" data-src="assets/media/tracking/sc/sc_09.mp4"></video><figcaption>Slope</figcaption></figure>  <!-- terrain_slopes__slope_161__008 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/sc/sc_10.jpg" data-src="assets/media/tracking/sc/sc_10.mp4"></video><figcaption>Curbs</figcaption></figure>  <!-- terrain_curbs__curb_120__005 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/sc/sc_11.jpg" data-src="assets/media/tracking/sc/sc_11.mp4"></video><figcaption>Sitting on a chair</figcaption></figure>  <!-- sitting__tibetan_prayer_wheel_motif_carved_single_chair_pine__009 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/sc/sc_12.jpg" data-src="assets/media/tracking/sc/sc_12.mp4"></video><figcaption>Stairs</figcaption></figure>  <!-- terrain_stairs__stairs_2643__0000 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/sc/sc_13.jpg" data-src="assets/media/tracking/sc/sc_13.mp4"></video><figcaption>Stairs</figcaption></figure>  <!-- terrain_stairs__stairs_2145__0001 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/sc/sc_14.jpg" data-src="assets/media/tracking/sc/sc_14.mp4"></video><figcaption>Slope</figcaption></figure>  <!-- terrain_slopes__slope_119__000 -->
+        <figure class="tile"><video muted loop playsinline preload="none" poster="assets/media/tracking/sc/sc_15.jpg" data-src="assets/media/tracking/sc/sc_15.mp4"></video><figcaption>Stairs</figcaption></figure>  <!-- terrain_stairs__stairs_2259__0001 -->
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    // Tracker clips load and play only while on screen.
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        const v = e.target;
+        if (e.isIntersecting) {
+          if (!v.src) v.src = v.dataset.src;
+          v.play().catch(() => {});
+        } else {
+          v.pause();
+        }
+      }
+    }, { rootMargin: "200px 0px" });
+    document.querySelectorAll(".tile video").forEach((v) => io.observe(v));
+  </script>
+
+</body>
+</html>
