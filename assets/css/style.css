@@ -79,7 +79,7 @@ figure { margin: 0; }
   border-radius: var(--radius);
   border: 1px solid var(--border);
 }
-video.media { background: #000; aspect-ratio: 16 / 9; }
+video.media { background: #fff; aspect-ratio: 16 / 9; }
 figcaption {
   color: var(--muted);
   font-size: 0.97rem;
